@@ -147,6 +147,18 @@
     }
     board.appendChild(div);
   });
+
+  const inputs = document.querySelectorAll('input');
+
+  // Load saved data
+  const saved = JSON.parse(sessionStorage.getItem('crossword_save') || '[]');
+  inputs.forEach((el, i) => el.value = saved[i] || '');
+
+  // Save on input
+  document.getElementById('grid').addEventListener('input', () => {
+  const data = Array.from(inputs).map(el => el.value);
+  sessionStorage.setItem('crossword_save', JSON.stringify(data));
+});
 </script>
 
 </body>
